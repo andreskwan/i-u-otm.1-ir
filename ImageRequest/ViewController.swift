@@ -20,7 +20,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //needs to be initialized before being capture by the closure 
+        var image = UIImage()
         // TODO: Add all the networking code here!
+        let catUrl = NSURL.init(string: Constants.CatURL)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(catUrl!) { (data, response, error) in
+            if((error == nil)){
+                print("task finished")
+                image = UIImage(data: data!)!
+                //1- dispatch asynch
+                //2- get main thread and 
+                //3- present the image after it has been downloaded
+                dispatch_async(dispatch_get_main_queue(), { 
+                    self.imageView.image = image
+                })
+            }
+        }
+        task.resume()
+        //here image is empty
+        //imageView.image = image
     }
 }
