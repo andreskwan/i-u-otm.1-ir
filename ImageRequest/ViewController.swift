@@ -23,13 +23,14 @@ class ViewController: UIViewController {
         //needs to be initialized before being capture by the closure 
         var image = UIImage()
         // TODO: Add all the networking code here!
-        let catUrl = NSURL.init(string: Constants.CatURL)
-        let task = NSURLSession.sharedSession().dataTaskWithURL(catUrl!) { (data, response, error) in
+//        let catUrl = NSURL.init(string: Constants.CatURL)
+        let dogUrl = NSURL(string: Constants.PuppyURL)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(dogUrl!) { (data, response, error) in
             if((error == nil)){
                 print("task finished")
                 image = UIImage(data: data!)!
                 //whitout this autolayout-constrains will be affected, which 
-                //can lead to a future crash 
+                //can lead to a future crash
                 //1- dispatch asynch
                 //2- get main thread and 
                 //3- present the image after it has been downloaded
