@@ -28,6 +28,8 @@ class ViewController: UIViewController {
             if((error == nil)){
                 print("task finished")
                 image = UIImage(data: data!)!
+                //whitout this autolayout-constrains will be affected, which 
+                //can lead to a future crash 
                 //1- dispatch asynch
                 //2- get main thread and 
                 //3- present the image after it has been downloaded
