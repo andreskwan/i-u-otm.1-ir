@@ -24,8 +24,9 @@ class ViewController: UIViewController {
         var image = UIImage()
         // TODO: Add all the networking code here!
 //        let catUrl = NSURL.init(string: Constants.CatURL)
-        let dogUrl = NSURL(string: Constants.PuppyURL)
-        let task = NSURLSession.sharedSession().dataTaskWithURL(dogUrl!) { (data, response, error) in
+        let animalUrl = URL(string: Constants.CatURL)
+        let task = URLSession.shared.dataTask(with: animalUrl!,
+                                              completionHandler: { (data, response, error) in
             if((error == nil)){
                 print("task finished")
                 image = UIImage(data: data!)!
@@ -34,11 +35,11 @@ class ViewController: UIViewController {
                 //1- dispatch asynch
                 //2- get main thread and 
                 //3- present the image after it has been downloaded
-                dispatch_async(dispatch_get_main_queue(), { 
+                DispatchQueue.main.async(execute: { 
                     self.imageView.image = image
                 })
             }
-        }
+        }) 
         task.resume()
         //here image is empty
         //imageView.image = image
